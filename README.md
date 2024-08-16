@@ -8,6 +8,7 @@
  - mobx
  - flutter_screenutil
  - dio || http
+ - sliding_clipped_nav_bar : custom BottomNavigatorBar
 
  
 # các kiến thức học được
@@ -16,12 +17,27 @@
   + designSize (Size(w, h)) : kích thước mặc định của toàn màn hình
   + minTextAdapt (bool) : thay đổi cỡ chữ theo tỉ lệ màn hình
   + splitScreenMode (bool) : nhận biết giao diện khi ở chế độ chia đôi màn hình
-
+ - ThemeData của Material :
+  + sử dụng Material3 : Có thể xem thêm ở GG => Túm cái váy lại là dùng tốt hơn
+  + colorScheme : Định nghĩa màu xuyên suốt cho ứng dụng
 
 
 # công việc tiếp theo
  - thiết kế route                   (done)
  - custom api                       (done)
  - custom mobx                      (done)
- - màn hình splash
-    + dùng Future delay"# musicApp" 
+ - màn hình splash                  (done)
+    + dùng Future delay             (done) => Bản sau update lại splash 
+ - màn hình home đang có lỗi 
+ - tìm hiểu sliding_clipper_nar_bar
+
+
+# tìm hiểu thêm
+ - CupertinoPageScaffold
+ - 
+
+
+# tương lai
+ - icon động : Lottie
+ - thay đổi : splash screen
+
