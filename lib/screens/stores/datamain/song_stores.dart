@@ -7,15 +7,21 @@ class SongStores = SongStoresBase with _$SongStores;
 
 abstract class SongStoresBase with Store {
   @observable
-  List<Song> songs = [];
+  ObservableList<Song> songs = ObservableList<Song>();
 
   @action
   Future<void> loading() async {
     try {
       final tmp = await SongServices().getData();
       songs.addAll(tmp);
+      print(songs);
     } catch (e) {
       throw e;
     }
+  }
+
+  @action
+  Future<void> callLoadData() async {
+    await loading();
   }
 }

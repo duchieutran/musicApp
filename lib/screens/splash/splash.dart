@@ -15,7 +15,7 @@ class _SplashState extends State<Splash> {
     // màn hình splash tự động vào màn hình home sau 3s
     Future.delayed(
       const Duration(seconds: 3),
-      () => Navigator.pushNamed(context, AppRoutes.home),
+      () => Navigator.pushNamed(context, AppRoutes.screen),
     );
     super.initState();
   }

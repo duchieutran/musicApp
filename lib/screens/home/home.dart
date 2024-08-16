@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:music/config/routes/app_routes.dart';
+import 'package:music/screens/stores/datamain/song_stores.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -9,38 +12,64 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int selectedIndex = 0;
-  PageController controller = PageController();
+  final _store = SongStores();
+  @override
+  void initState() {
+    _store.callLoadData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SlidingClippedNavBar(
-        backgroundColor: Colors.white,
-        onButtonPressed: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-          controller.animateToPage(selectedIndex,
-              duration: const Duration(milliseconds: 400),
-              curve: Curves.easeOutQuad);
-        },
-        iconSize: 30,
-        activeColor: const Color(0xFF01579B),
-        selectedIndex: selectedIndex,
-        barItems: [
-          BarItem(
-            icon: Icons.home,
-            title: 'Events',
-          ),
-          BarItem(
-            icon: Icons.search_rounded,
-            title: 'Search',
-          ),
-
-          /// Add more BarItem if you want
-        ],
+      appBar: AppBar(
+        leading: const Icon(
+          Icons.star,
+          color: Colors.yellow,
+        ),
+        title: Text(
+          '💖 MuSic App 💖',
+          style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.sp),
+        ),
+        centerTitle: true,
+        actions: const [],
+        backgroundColor: Theme.of(context).colorScheme.onInverseSurface, //
       ),
+      body: Observer(
+          builder: (context) => ListView.builder(
+                itemCount: _store.songs.length,
+                itemBuilder: (context, index) {
+                  final song = _store.songs[index];
+                  return ListTile(
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(song.image),
+                    ),
+                    title: Text(
+                      song.title,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                    subtitle: Text(
+                      song.artist,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                      ),
+                    ),
+                    trailing: const Icon(Icons.play_circle),
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.play, arguments: {
+                        'playingSong': song,
+                        'songs': _store.songs
+                      });
+                    },
+                  );
+                },
+              )),
     );
   }
 }

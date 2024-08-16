@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:music/screens/home/home.dart';
+import 'package:music/data/models/song.dart';
+import 'package:music/screens/playing/playing.dart';
+import 'package:music/screens/screens.dart';
 import 'package:music/screens/splash/splash.dart';
 
 class AppRoutes {
@@ -18,13 +20,19 @@ class AppRoutes {
     switch (nameRoute) {
       case splash:
         return const Splash();
-      case home:
-        return const Home();
+      case screen:
+        return const Screens();
+      case play:
+        return Playing(
+          playingSong: arguments as Song,
+          songs: arguments as List<Song>,
+        );
       default:
         throw "$nameRoute is not define";
     }
   }
 
   static const String splash = '/';
-  static const String home = 'home';
+  static const String screen = 'screen';
+  static const String play = 'play';
 }

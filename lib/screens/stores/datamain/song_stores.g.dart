@@ -12,13 +12,13 @@ mixin _$SongStores on SongStoresBase, Store {
   late final _$songsAtom = Atom(name: 'SongStoresBase.songs', context: context);
 
   @override
-  List<Song> get songs {
+  ObservableList<Song> get songs {
     _$songsAtom.reportRead();
     return super.songs;
   }
 
   @override
-  set songs(List<Song> value) {
+  set songs(ObservableList<Song> value) {
     _$songsAtom.reportWrite(value, super.songs, () {
       super.songs = value;
     });
@@ -30,6 +30,14 @@ mixin _$SongStores on SongStoresBase, Store {
   @override
   Future<void> loading() {
     return _$loadingAsyncAction.run(() => super.loading());
+  }
+
+  late final _$callLoadDataAsyncAction =
+      AsyncAction('SongStoresBase.callLoadData', context: context);
+
+  @override
+  Future<void> callLoadData() {
+    return _$callLoadDataAsyncAction.run(() => super.callLoadData());
   }
 
   @override

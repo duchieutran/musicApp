@@ -13,31 +13,41 @@
  
 # các kiến thức học được
  - xem lại được mobx, api và route, model
+
  - dùng screenutil để tuỳ chỉnh kích thước theo tỉ lệ màn hình:
   + designSize (Size(w, h)) : kích thước mặc định của toàn màn hình
   + minTextAdapt (bool) : thay đổi cỡ chữ theo tỉ lệ màn hình
   + splitScreenMode (bool) : nhận biết giao diện khi ở chế độ chia đôi màn hình
+
  - ThemeData của Material :
   + sử dụng Material3 : Có thể xem thêm ở GG => Túm cái váy lại là dùng tốt hơn
   + colorScheme : Định nghĩa màu xuyên suốt cho ứng dụng
 
+ - ClipRRect : dùng để bo góc ảnh
+
+
 
 # công việc tiếp theo
- - thiết kế route                   (done)
- - custom api                       (done)
- - custom mobx                      (done)
- - màn hình splash                  (done)
-    + dùng Future delay             (done) => Bản sau update lại splash 
- - màn hình home đang có lỗi 
- - tìm hiểu sliding_clipper_nar_bar
+ - thiết kế route                      (done)
+ - custom api                          (done)
+ - custom mobx                         (done)
+ - màn hình splash                     (done)
+    + dùng Future delay                (done) => Bản sau update lại splash 
+ - màn hình screens đang có lỗi        (done)
+ - tìm hiểu sliding_clipper_nar_bar    (done)
+ - tiếp tục làm playing
+ (https://youtu.be/87d4sQMnf1U?t=396)
+ - tìm hiểu ListView.sparated ở dưới
 
 
 # tìm hiểu thêm
  - CupertinoPageScaffold
- - 
+ - Divider 
+ - ListView.sparated
 
 
 # tương lai
  - icon động : Lottie
  - thay đổi : splash screen
+
 
