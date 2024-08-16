@@ -6,10 +6,16 @@
 
 # cách package dùng trong ứng dụng
  - mobx
+ - flutter_screenutil
+ - dio || http
+
  
 # các kiến thức học được
  - xem lại được mobx, api và route, model
-
+ - dùng screenutil để tuỳ chỉnh kích thước theo tỉ lệ màn hình:
+  + designSize (Size(w, h)) : kích thước mặc định của toàn màn hình
+  + minTextAdapt (bool) : thay đổi cỡ chữ theo tỉ lệ màn hình
+  + splitScreenMode (bool) : nhận biết giao diện khi ở chế độ chia đôi màn hình
 
 
 
