@@ -17,7 +17,7 @@ class AppRoutes {
       {required String nameRoute,
       required BuildContext context,
       Object? arguments}) {
-    switch (nameRoute) {
+    switch (nameRoute) { 
       case splash:
         return const Splash();
       case screen:

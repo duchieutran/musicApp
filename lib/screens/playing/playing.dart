@@ -22,7 +22,7 @@ class _PlayingState extends State<Playing> {
             icon: const Icon(Icons.arrow_back_ios)),
       ),
       body: const Center(
-        child: Text('Hieu'),
+        child: Text('cute'),
       ),
     );
   }
