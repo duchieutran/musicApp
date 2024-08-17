@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
         ),
         centerTitle: true,
         actions: const [],
-        backgroundColor: Theme.of(context).colorScheme.onInverseSurface, //
+        backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
       ),
       body: Observer(
           builder: (context) => ListView.builder(
@@ -60,7 +60,11 @@ class _HomeState extends State<Home> {
                         fontSize: 13.sp,
                       ),
                     ),
-                    trailing: const Icon(Icons.play_circle),
+                    trailing: IconButton(
+                        onPressed: () {
+                          showBottomSheet();
+                        },
+                        icon: const Icon(Icons.more_horiz)),
                     onTap: () {
                       Navigator.pushNamed(context, AppRoutes.play, arguments: {
                         'playingSong': song,
@@ -70,6 +74,39 @@ class _HomeState extends State<Home> {
                   );
                 },
               )),
+    );
+  }
+
+  // show bottomsheet khi nhấn nút more
+  void showBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => ClipRRect(
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(16),
+        ),
+        child: Container(
+          height: 400,
+          decoration: const BoxDecoration(color: Colors.grey),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Text(
+                  'Tính năng nâng cao thiết kế sau',
+                  style: TextStyle(color: Colors.white),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Close'))
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

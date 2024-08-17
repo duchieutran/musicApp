@@ -14,7 +14,6 @@ abstract class SongStoresBase with Store {
     try {
       final tmp = await SongServices().getData();
       songs.addAll(tmp);
-      print(songs);
     } catch (e) {
       throw e;
     }

@@ -23,10 +23,13 @@ class AppRoutes {
       case screen:
         return const Screens();
       case play:
-        return Playing(
-          playingSong: arguments as Song,
-          songs: arguments as List<Song>,
-        );
+        if (arguments is Map<String, dynamic>) {
+          return Playing(
+            playingSong: arguments['playingSong'] as Song,
+            songs: arguments['songs'] as List<Song>,
+          );
+        }
+
       default:
         throw "$nameRoute is not define";
     }

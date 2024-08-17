@@ -25,6 +25,11 @@
 
  - ClipRRect : dùng để bo góc ảnh
 
+ - Nếu cần truyền 2 tham số agruments thì có thể tạo 1 Map or 1 List (tham khảo agruments của Playing) 
+
+ - cách dùng showBottomSheet trong 'lib\screens\home\home.dart' 
+
+ 
 
 
 # công việc tiếp theo
@@ -35,6 +40,7 @@
     + dùng Future delay                (done) => Bản sau update lại splash 
  - màn hình screens đang có lỗi        (done)
  - tìm hiểu sliding_clipper_nar_bar    (done)
+ - xử lý lỗi agruments                 (done)
  - tiếp tục làm playing
  (https://youtu.be/87d4sQMnf1U?t=396)
  - tìm hiểu ListView.sparated ở dưới
