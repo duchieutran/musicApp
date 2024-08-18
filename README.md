@@ -10,6 +10,9 @@
  - dio || http
  - sliding_clipped_nav_bar : custom BottomNavigatorBar
  - pretty_dio_logger : hiển thị các request và respose
+ - just_audio : chưa tìm hiểu
+ - rxdart : chưa tìm hiểu
+ - audio_video_progress_bar : chưa tìm hiểu
 
  
 # các kiến thức học được

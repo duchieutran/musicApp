@@ -1,6 +1,8 @@
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:music/data/models/song.dart';
+import 'package:music/screens/playing/audio_player_manager.dart';
 
 class Playing extends StatefulWidget {
   final Song playingSong;
@@ -17,12 +19,16 @@ class Playing extends StatefulWidget {
 
 class _PlayingState extends State<Playing> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  late AudioPlayerManager _audioPlayerManager;
 
   @override
   void initState() {
     // chú ý phần trên ní ơi
     _controller =
         AnimationController(vsync: this, duration: Duration(seconds: 12));
+    _audioPlayerManager =
+        AudioPlayerManager(songUrl: widget.playingSong.source);
+    _audioPlayerManager.init();
     super.initState();
   }
 
@@ -120,11 +126,28 @@ class _PlayingState extends State<Playing> with SingleTickerProviderStateMixin {
                 ],
               ),
             ),
-            
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 32, left: 24, right: 24, bottom: 16),
+              child: _progressBar(),
+            )
             // Tiếp ở đây
           ],
         ),
       ),
+    );
+  }
+
+  // progressBar
+  StreamBuilder<DurationState> _progressBar() {
+    return StreamBuilder<DurationState>(
+      stream: _audioPlayerManager.durationState,
+      builder: (context, snapshot) {
+        final durationState = snapshot.data;
+        final progress = durationState?.progress ?? Duration.zero;
+        final total = durationState?.total ?? Duration.zero;
+        return ProgressBar(progress: progress, total: total,);
+      },
     );
   }
 }
