@@ -41,6 +41,7 @@ dependencies:
   flutter_mobx: ^2.2.1+1
   flutter_screenutil: ^5.9.3
   sliding_clipped_nav_bar: ^3.1.1
+  pretty_dio_logger: ^1.4.0
 
 dev_dependencies:
   flutter_test:

@@ -35,7 +35,7 @@ class _ScreensState extends State<Screens> {
       ),
       bottomNavigationBar: Observer(
         builder: (context) => SlidingClippedNavBar(
-          backgroundColor: const Color.fromARGB(255, 92, 198, 247), // màu nền
+          backgroundColor: Colors.grey, // màu nền
           onButtonPressed: (index) {
             navigatorstore.setIndex(index);
             controller.animateToPage(navigatorstore.indexCurrent,

@@ -9,6 +9,7 @@
  - flutter_screenutil
  - dio || http
  - sliding_clipped_nav_bar : custom BottomNavigatorBar
+ - pretty_dio_logger : hiển thị các request và respose
 
  
 # các kiến thức học được
@@ -28,6 +29,14 @@
  - Nếu cần truyền 2 tham số agruments thì có thể tạo 1 Map or 1 List (tham khảo agruments của Playing) 
 
  - cách dùng showBottomSheet trong 'lib\screens\home\home.dart' 
+
+ - trong dùng pretty_dio_logger trong dio
+
+ - RotationTransition: ảnh xoay (CHƯA TÌM HIỂU)
+
+ - FadeInImage.assetNetwork : (CHƯA TÌM HIỂU)
+
+ - imageErrorBuilder : ảnh lỗi (CHƯA TÌM HIỂU)
 
  
 
@@ -50,6 +59,10 @@
  - CupertinoPageScaffold
  - Divider 
  - ListView.sparated
+ - RotationTransition
+ - RotationTransition
+ - FadeInImage.assetNetwork
+ - imageErrorBuilder
 
 
 # tương lai
