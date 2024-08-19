@@ -1,3 +1,5 @@
+// TODO : update sang provider
+
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -9,19 +11,23 @@ class AudioPlayerManager {
 
   void init() {
     durationState = Rx.combineLatest2<Duration, PlaybackEvent, DurationState>(
-      player.positionStream,
-      player.playbackEventStream,
-      (position, playbackEvent) => DurationState(
-          progress: position,
-          buffered: playbackEvent.bufferedPosition,
-          total: playbackEvent.duration),
-    );
+        player.positionStream,
+        player.playbackEventStream,
+        (position, playbackEvent) => DurationState(
+              progress: position,
+              buffered: playbackEvent.bufferedPosition,
+              total: playbackEvent.duration,
+            ));
     player.setUrl(songUrl);
+  }
+
+  void dispose() {
+    player.dispose();
   }
 }
 
 class DurationState {
-  DurationState({
+  const DurationState({
     required this.progress,
     required this.buffered,
     this.total,

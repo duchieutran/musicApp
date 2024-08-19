@@ -44,6 +44,7 @@
  
 
 
+
 # công việc tiếp theo
  - thiết kế route                      (done)
  - custom api                          (done)
@@ -66,7 +67,7 @@
  - RotationTransition
  - FadeInImage.assetNetwork
  - imageErrorBuilder
-
+ - just_audio_background
 
 # tương lai
  - icon động : Lottie

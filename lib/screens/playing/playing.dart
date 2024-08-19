@@ -1,8 +1,10 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:music/data/models/song.dart';
 import 'package:music/screens/playing/audio_player_manager.dart';
+import 'package:music/screens/playing/media_button_control.dart';
 
 class Playing extends StatefulWidget {
   final Song playingSong;
@@ -25,11 +27,17 @@ class _PlayingState extends State<Playing> with SingleTickerProviderStateMixin {
   void initState() {
     // chú ý phần trên ní ơi
     _controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 12));
+        AnimationController(vsync: this, duration: const Duration(seconds: 12));
     _audioPlayerManager =
         AudioPlayerManager(songUrl: widget.playingSong.source);
     _audioPlayerManager.init();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _audioPlayerManager.dispose(); // tránh việc trùng lặp bài hát
+    super.dispose();
   }
 
   @override
@@ -75,7 +83,7 @@ class _PlayingState extends State<Playing> with SingleTickerProviderStateMixin {
             SizedBox(
               height: 45.sp,
             ),
-            Container(
+            SizedBox(
               width: 0.8.sw,
               child: RotationTransition(
                 turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
@@ -108,14 +116,14 @@ class _PlayingState extends State<Playing> with SingleTickerProviderStateMixin {
                     children: [
                       Text(
                         widget.playingSong.title,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Text(
                         widget.playingSong.artist,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -128,8 +136,39 @@ class _PlayingState extends State<Playing> with SingleTickerProviderStateMixin {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  top: 32, left: 24, right: 24, bottom: 16),
+                top: 30,
+                left: 24,
+                right: 24,
+                bottom: 15,
+              ),
               child: _progressBar(),
+            ),
+            // thanh buttoncontroller
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const MediaButtonControl(
+                    function: null,
+                    icon: Icons.shuffle,
+                    color: Colors.black,
+                    size: 24),
+                const MediaButtonControl(
+                    function: null,
+                    icon: Icons.skip_previous,
+                    color: Colors.black,
+                    size: 36),
+                _playButton(),
+                const MediaButtonControl(
+                    function: null,
+                    icon: Icons.skip_next,
+                    color: Colors.black,
+                    size: 36),
+                const MediaButtonControl(
+                    function: null,
+                    icon: Icons.repeat,
+                    color: Colors.black,
+                    size: 24),
+              ],
             )
             // Tiếp ở đây
           ],
@@ -145,8 +184,73 @@ class _PlayingState extends State<Playing> with SingleTickerProviderStateMixin {
       builder: (context, snapshot) {
         final durationState = snapshot.data;
         final progress = durationState?.progress ?? Duration.zero;
+        final buffered = durationState?.buffered ?? Duration.zero;
         final total = durationState?.total ?? Duration.zero;
-        return ProgressBar(progress: progress, total: total,);
+        return ProgressBar(
+          // widget thanh nhạc
+          progress: progress, // thời gian đã chạy
+          total: total, // tổng thời gian của thanh
+          buffered: buffered, // bộ đệm
+          onSeek: _audioPlayerManager.player.seek,
+          // có thể đổi màu của thanh progressbar
+        );
+      },
+    );
+  }
+
+  // play
+  StreamBuilder<PlayerState> _playButton() {
+    return StreamBuilder(
+      stream: _audioPlayerManager.player.playerStateStream,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Container(
+            margin: const EdgeInsets.all(8),
+            width: 48,
+            height: 48,
+            child: const CircularProgressIndicator(),
+          );
+        }
+        final playState = snapshot.data;
+        final processeingState = playState?.processingState;
+        final playing = playState?.playing;
+        // nếu đang tải dữ liệu = loading , = buffering (tải dữ liệu từ internet)
+        // nếu đang không playing (đang chạy thì dùng)
+        // nếu đang phát nhạc thì có nút dừng
+        // có thể tua bài hát
+        if (processeingState == ProcessingState.loading ||
+            processeingState == ProcessingState.buffering) {
+          return Container(
+            margin: const EdgeInsets.all(8),
+            width: 48,
+            height: 48,
+            child: const CircularProgressIndicator(),
+          );
+        } else if (playing == true) {
+          return MediaButtonControl(
+              function: () {
+                _audioPlayerManager.player.pause();
+              },
+              icon: Icons.pause,
+              color: Colors.black,
+              size: 40);
+        } else if (processeingState != ProcessingState.completed) {
+          return MediaButtonControl(
+              function: () {
+                _audioPlayerManager.player.play();
+              },
+              icon: Icons.play_arrow,
+              color: Colors.black,
+              size: 40);
+        } else {
+          return MediaButtonControl(
+              function: () {
+                _audioPlayerManager.player.seek(Duration.zero);
+              },
+              icon: Icons.replay,
+              color: null,
+              size: 40);
+        }
       },
     );
   }
