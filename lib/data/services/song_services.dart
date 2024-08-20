@@ -13,7 +13,7 @@ class SongServices extends SongReponsitory {
       List<Song> songs = songList.map((song) => Song.fromJSON(song)).toList();
       return songs;
     } catch (e) {
-      rethrow;
+      rethrow; //TODO : Chưa custom Error cái này nhe Híu
     }
   }
 }

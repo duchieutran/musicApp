@@ -8,7 +8,7 @@ class AudioPlayerManager {
   final player = AudioPlayer();
   Stream<DurationState>? durationState;
   String songUrl;
-
+ 
   void init() {
     durationState = Rx.combineLatest2<Duration, PlaybackEvent, DurationState>(
         player.positionStream,

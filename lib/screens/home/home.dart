@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final _store = SongStores();
+  final _store = SongStores(); // TODO : Khai báo kiểu dữ liệu xong đến tên biến
   @override
   void initState() {
     _store.callLoadData();
@@ -39,41 +39,48 @@ class _HomeState extends State<Home> {
         backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
       ),
       body: Observer(
-          builder: (context) => ListView.builder(
-                itemCount: _store.songs.length,
-                itemBuilder: (context, index) {
-                  final song = _store.songs[index];
-                  return ListTile(
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(song.image),
-                    ),
-                    title: Text(
-                      song.title,
-                      style: TextStyle(
-                        fontSize: 16.sp,
+          builder: (context) => _store.songs.isEmpty
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : ListView.builder(
+                  itemCount: _store.songs.length,
+                  itemBuilder: (context, index) {
+                    final song = _store.songs[index];
+                    return ListTile(
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: FadeInImage.assetNetwork(
+                            placeholder: 'assets/images/music.png',
+                            image: song.image),
                       ),
-                    ),
-                    subtitle: Text(
-                      song.artist,
-                      style: TextStyle(
-                        fontSize: 13.sp,
+                      title: Text(
+                        song.title,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                        ),
                       ),
-                    ),
-                    trailing: IconButton(
-                        onPressed: () {
-                          showBottomSheet();
-                        },
-                        icon: const Icon(Icons.more_horiz)),
-                    onTap: () {
-                      Navigator.pushNamed(context, AppRoutes.play, arguments: {
-                        'playingSong': song,
-                        'songs': _store.songs
-                      });
-                    },
-                  );
-                },
-              )),
+                      subtitle: Text(
+                        song.artist,
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                        ),
+                      ),
+                      trailing: IconButton(
+                          onPressed: () {
+                            showBottomSheet();
+                          },
+                          icon: const Icon(Icons.more_horiz)),
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.play,
+                            arguments: {
+                              'playingSong': song,
+                              'songs': _store.songs
+                            });
+                      },
+                    );
+                  },
+                )),
     );
   }
 

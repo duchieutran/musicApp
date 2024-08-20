@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music/app.dart';
 
-Future<void> main() async {
+void main() {
   runApp(const MyApp());
 }

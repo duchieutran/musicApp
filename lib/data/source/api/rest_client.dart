@@ -44,7 +44,7 @@ class RestClient {
           onReceiveProgress: onReceiveProgress);
       return response.data;
     } catch (e) {
-      throw "Error"; // TODO : custom error
+      throw "Error"; // TODO : custom error (chưa làm)
     }
   }
 }

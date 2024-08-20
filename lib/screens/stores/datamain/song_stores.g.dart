@@ -32,6 +32,22 @@ mixin _$SongStores on SongStoresBase, Store {
     return _$loadingAsyncAction.run(() => super.loading());
   }
 
+  late final _$_saveUserAsyncAction =
+      AsyncAction('SongStoresBase._saveUser', context: context);
+
+  @override
+  Future<void> _saveUser(List<Song> song) {
+    return _$_saveUserAsyncAction.run(() => super._saveUser(song));
+  }
+
+  late final _$_loadUserListAsyncAction =
+      AsyncAction('SongStoresBase._loadUserList', context: context);
+
+  @override
+  Future<List<Song>> _loadUserList() {
+    return _$_loadUserListAsyncAction.run(() => super._loadUserList());
+  }
+
   late final _$callLoadDataAsyncAction =
       AsyncAction('SongStoresBase.callLoadData', context: context);
 

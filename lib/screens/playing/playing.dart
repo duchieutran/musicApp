@@ -36,7 +36,8 @@ class _PlayingState extends State<Playing> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    _audioPlayerManager.dispose(); // tránh việc trùng lặp bài hát
+    _controller.dispose();
+    _audioPlayerManager.dispose(); // để out ra cho khỏi trùng nhạc đó men :)
     super.dispose();
   }
 
@@ -90,12 +91,11 @@ class _PlayingState extends State<Playing> with SingleTickerProviderStateMixin {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular((1.sw - 0.1.sw) / 2),
                   child: FadeInImage.assetNetwork(
-                    placeholder: widget.playingSong.image,
+                    placeholder: 'assets/images/music.png',
                     image: widget.playingSong.image,
                     width: 0.8.sw,
                     height: 0.8.sw,
                     // TODO : thêm ảnh nếu ảnh lỗi
-                    // imageErrorBuilder: ,
                   ),
                 ),
               ),
@@ -214,6 +214,7 @@ class _PlayingState extends State<Playing> with SingleTickerProviderStateMixin {
         final playState = snapshot.data;
         final processeingState = playState?.processingState;
         final playing = playState?.playing;
+        // trường hợp :vv
         // nếu đang tải dữ liệu = loading , = buffering (tải dữ liệu từ internet)
         // nếu đang không playing (đang chạy thì dùng)
         // nếu đang phát nhạc thì có nút dừng

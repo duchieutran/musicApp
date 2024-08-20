@@ -45,6 +45,8 @@ dependencies:
   just_audio: ^0.9.37
   rxdart: ^0.28.0
   audio_video_progress_bar: ^2.0.3
+  provider: ^6.1.2
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:

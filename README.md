@@ -57,6 +57,7 @@
  - tiếp tục làm playing
  (https://youtu.be/87d4sQMnf1U?t=396)
  - tìm hiểu ListView.sparated ở dưới
+ - Xử lý lỗi
 
 
 # tìm hiểu thêm
